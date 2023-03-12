@@ -79,5 +79,11 @@ Surpreendentemente, o modelo cujo $\epsilon_{dec} = 0.99996$ apresentou o melhor
 
 * Para facilitar o plot dos gráficos, trabalhei com um modulo que salva listas em arquivos chamado pickle.
 
+* Para testar o modelo escolhido basta rodar:
+```
+pytest -s test_frozenlake.py
+```
+Este comando permitirá rodar os testes e vizualizar quantos rewards foram dados mesmo quando o teste acerta ja configurado para a q-table escolhida, o arquivo contendo a q-table escolhida é "q-table-0.99996.csv", mas todas as q-tables podem ser consultadas na pasta data
+
 
 
