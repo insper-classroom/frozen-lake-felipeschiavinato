@@ -30,7 +30,7 @@ Você deve adicionar neste projeto e fazer o commit dos seguintes artefatos:
 
 ## Comparação entre abordagens
 
-O Q-learning foi o algorítimo escolhido por ser de característica off-policy, atualizando seu resultado de acordo com a política ótima e por se tratar de um ambiente estocástico. Vamos aprofundar o processo de ajuste dos hiperparâmetros do algoritmo Q-learning para melhorar seu desempenho na resolução do ambiente FrozenLake. Primeiramente foram fixados os seguintes parametros:
+O Q-learning foi o algorítimo escolhido por ser de característica off-policy, atualizando seu resultado de acordo com a política ótima e por se tratar de um ambiente estocástico. Vamos aprofundar o processo de ajuste dos hiperparâmetros do algoritmo Q-learning para melhorar seu desempenho na resolução do ambiente FrozenLake com o objetivo de atingir pelo menos 80% de eficiencia. Primeiramente foram fixados os seguintes parametros:
 
 
 * $\alpha = 0.1$
@@ -55,6 +55,29 @@ O grafico nos permite vizualizar para varios valores de $\epsilon_{dec}$, qual a
 
 ### Treinamento
 
+Para valores de $\epsilon_{dec}$ inferiores a $0.9994$ o algoritimo parecia estar preso em um otimo local, uma vez que o tempo de treinamento estava extremamente alto e nao havia convergencia. A partir de $0.9994$, o treinamento parecia convergir na terceira ou quarta tentativa, conforme $\epsilon_{dec}$ aumentava, a probabilidae de convergencia tambem aumentava. Dessa forma, foi plotado um gráfico dos treinamentos convergentes a partir de $0.9994$:
+
+![alt text](results/rewards_per_episodes.png "Rewards x Episodes")
+
+Neste gráfico podemos observar que para valores menores de $\epsilon_{dec}$ o apredizado ocorria de forma mais rapida, convergindo rapidamente para uma efciencia maior que 0.8, este comportamento se sucedeu até $\epsilon_{dec} = 0.99995$ diminuindo gradualmente a velocidade do aprendizado. Para o valor de $\epsilon_{dec} = 0.99996$ o modelo da a entender que convergiria em uma taxa maior que 0.8 se mais episodios de simulação fossem alocaodos, para os demais nao há como prever se houve convergencia, e se caso houvesse em qual taxa de eficiencia convirgiria, para os 100000 episodios.
+
+### Eficiencia
+
+Entretanto, um modelo que aprendeu rapidamente nao implica em uma eficiencia proporcional a sua rapidez de aprendizado. Portanto, para os modelos treinados, foram coletadas 100 amostras de 1000 simulações cada para cada modelo, de modo a observarmos seu reward maximo, médio e minimo. Assim, teremos uma métrica real para medir a eficiencia do modelo. Lembrando que, estamos considerando como eficiencia o simples fato do algorítimo passar no teste, não correspondendo necessariamente ao numero minimo de ações para vencer no ambiente FrozenLake. Em outras palavras, o grafico asseguir mede o quao eficiente é cada modelo em simplesmente vencer o ambiente:
+
+![alt text](results/rewards_stats.png "Rewards x Episodes")
+
+Surpreendentemente, o modelo cujo $\epsilon_{dec} = 0.99996$ apresentou o melhor desempenho nos testes, uma vez que durante o treinamento este modelo não finalizou as simulação convergindo $>=0.8$. O modelo teve uma média de eficiencia extremamente alta, quase com 100% em um ambiente não deterministico
+
+### Comentarios e Hipoteses de Melhoria
+
+* Foram realizadas 100 amostras, e cada amostra analizava 1000 simulações, no total 100000 simulações por modelo, ou seja, acredito que seja improvavel um viés de amostragem para este caso. Entretanto, é apenas uma hipotese, uma vez que seria necessario uma análise da distribuição probabilistica focada no contexto em questão para afirmarmos algo do tipo.
+
+* Outra hipotese seria devido ao fato justamente de estarmos lidando com um ambiente estocástico, ou seja, mesmo que treinemos duas vezes o mesmo algorítimo com os mesmos parametros, é improvavel que o modelo apresente a mesma curva de aprendizado e desempenho. Assim esta versão do modelo treinada por sorte gerou uma q-table muito boa para resolver o ambiente FrozenLake mas que pode ser um outlier. Pretendo realizar diferentes treinamentos com os mesmos parametros para compreender melhor esta hipotese.
+
+* Os graficos actions x episodes de cada modelo treinado podem ser encontrados na pasta results, no geral o numero de acoes girou em torno de 80 a 100 acoes por simulação.
+
+* Para facilitar o plot dos gráficos, trabalhei com um modulo que salva listas em arquivos chamado pickle.
 
 
 
