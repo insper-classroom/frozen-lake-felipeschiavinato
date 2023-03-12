@@ -2,7 +2,7 @@ import gymnasium as gym
 import numpy as np
 from numpy import loadtxt
 
-epsilon_dec= 0.99999
+epsilon_dec= 0.99996
 
 def test_01(): 
 
