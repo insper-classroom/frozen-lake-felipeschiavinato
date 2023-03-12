@@ -22,7 +22,7 @@ Você deve adicionar neste projeto e fazer o commit dos seguintes artefatos:
 | Algoritmo       |      Q-Learning      |
 | alpha           |      0.1      |
 | gamma           |      0.99      |
-| epsilon         |       0.999     |
+| epsilon         |       0.9999     |
 | epsilon_dec     |      0.99996      |
 | epsilon_min     |      0.0001      |
 | qtd_episodios   |      100000      |
