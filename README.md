@@ -30,4 +30,31 @@ Você deve adicionar neste projeto e fazer o commit dos seguintes artefatos:
 
 ## Comparação entre abordagens
 
-* inserir o seu gráfico aqui, se for o caso. 
+O Q-learning foi o algorítimo escolhido por ser de característica off-policy, atualizando seu resultado de acordo com a política ótima e por se tratar de um ambiente estocástico. Vamos aprofundar o processo de ajuste dos hiperparâmetros do algoritmo Q-learning para melhorar seu desempenho na resolução do ambiente FrozenLake. Primeiramente foram fixados os seguintes parametros:
+
+
+* $\alpha = 0.1$
+
+* $\gamma = 0.99$
+
+* $\epsilon = 0.9999$
+
+* $\epsilon_{min} = 0.0001$
+
+* $E = 100000$
+
+Em seguida, um gráfico foi plotado de modo a vizualizar o decaimento do parametro $\epsilon$ para diferentes $\epsilon_{dec}$ ao longo dos episodios de treinamento.
+
+![alt text](results/epsilon_per_episodes.png "Epsilon x Episodes")
+
+<!-- O gráfico ajuda a visualizar o efeito de diferentes valores de epsilon na compensação exploration-explotation durante o processo de Q-learning. Um valor mais alto de epsilon significa que o algoritmo tem mais chances de explorar o ambiente selecionando ações aleatórias, enquanto um valor mais baixo de epsilon significa que o algoritmo tem mais chances de explorar os valores Q aprendidos selecionando a ação com o valor Q mais alto.
+
+Além disso, mostra que, à medida que o epsilon diminui ao longo do tempo, o algoritmo se concentra mais em explorar os valores Q aprendidos, o que pode levar a um desempenho melhor na tarefa. No entanto, um valor baixo de epsilon pode fazer com que o algoritmo fique preso em um ótimo local e perca o ótimo global. Portanto, é essencial equilibrar a exploração e a "exploitação" escolhendo um valor apropriado de $\epsilon_{dec}$. -->
+
+O grafico nos permite vizualizar para varios valores de $\epsilon_{dec}$, qual a curva que controla a diminuiçao da probailidade de exploração, para valores menores de $\epsilon_{dec}$, a diminuição é brusca, fazendo com que durante o treinamento, o modelo pare de explorar logo nos primeiros episodios, e conforme $\epsilon_{dec}$ aumenta, o decaimento de $\epsilon$ fica gada vez mais gradual.
+
+### Treinamento
+
+
+
+
